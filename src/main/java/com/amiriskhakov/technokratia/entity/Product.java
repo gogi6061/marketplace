@@ -1,12 +1,10 @@
 package com.amiriskhakov.technokratia.entity;
 
-import org.springframework.context.annotation.Scope;
-
 import javax.persistence.*;
 
 @Entity
 
-public class Product implements Position {
+public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -18,13 +16,11 @@ public class Product implements Position {
     private boolean deleted;
 
     @Column(nullable = false,
-    unique = true)
+            unique = true)
     private String articul;
 
     @Column(nullable = false)
     private String name;
-
-
 
 
     public Product() {

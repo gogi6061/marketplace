@@ -1,9 +1,7 @@
 package com.amiriskhakov.technokratia.payload.request;
 
 import com.amiriskhakov.technokratia.anottations.ValidEmail;
-import com.amiriskhakov.technokratia.entity.Product;
 import com.amiriskhakov.technokratia.facade.ProductFacade;
-import com.fasterxml.jackson.annotation.JsonFormat;
 
 import java.util.List;
 

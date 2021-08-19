@@ -1,6 +1,5 @@
 package com.amiriskhakov.technokratia.controllers;
 
-import com.amiriskhakov.technokratia.anottations.ValidEmail;
 import com.amiriskhakov.technokratia.payload.request.OrderRequest;
 import com.amiriskhakov.technokratia.payload.response.MessageResponse;
 import com.amiriskhakov.technokratia.services.OrderService;
@@ -38,7 +37,7 @@ public class OrderController {
     }
 
     @GetMapping("/get")
-    public ResponseEntity<Object> getOrder(@RequestParam("email") @ValidEmail String email) {
+    public ResponseEntity<Object> getOrder(@RequestParam("email") String email) {
 
         return new ResponseEntity<>(orderService.getOrdersByEmail(email), HttpStatus.OK);
 
@@ -47,10 +46,10 @@ public class OrderController {
 
     @GetMapping("/getByArt")
     public ResponseEntity<Object> getOrderArt(@RequestParam("art") String art) {
-        return new ResponseEntity<Object>(orderService.getOrdersByArt(art), HttpStatus.OK);
+        return new ResponseEntity<>(orderService.getOrdersByArt(art), HttpStatus.OK);
     }
 
-    @GetMapping("/getByDate")
+    @GetMapping("/getByDateBetween")
     public ResponseEntity<Object> getOrderBetweenDates(@RequestParam("from") String from,
                                                        @RequestParam("to") String to) {
 

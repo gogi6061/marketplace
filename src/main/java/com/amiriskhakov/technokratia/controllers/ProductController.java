@@ -1,6 +1,5 @@
 package com.amiriskhakov.technokratia.controllers;
 
-import com.amiriskhakov.technokratia.entity.Product;
 import com.amiriskhakov.technokratia.payload.request.ProductRequest;
 import com.amiriskhakov.technokratia.payload.response.MessageResponse;
 import com.amiriskhakov.technokratia.services.ProductService;
@@ -24,14 +23,13 @@ public class ProductController {
 
     @RequestMapping("/add")
     public ResponseEntity<Object> addProduct(@RequestBody ProductRequest productRequest,
-                                             BindingResult bindingResult){
+                                             BindingResult bindingResult) {
         ResponseEntity<Object> errors = responseErrorValidation.mapValidationService(bindingResult);
         if (!ObjectUtils.isEmpty(errors)) return errors;
 
 
         productService.saveProduct(productRequest);
         return ResponseEntity.ok(new MessageResponse("Product created"));
-
 
 
     }

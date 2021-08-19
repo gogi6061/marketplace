@@ -2,7 +2,6 @@ package com.amiriskhakov.technokratia.services;
 
 import com.amiriskhakov.technokratia.entity.Product;
 import com.amiriskhakov.technokratia.exceptions.NoSuchProductException;
-import com.amiriskhakov.technokratia.exceptions.OrderException;
 import com.amiriskhakov.technokratia.exceptions.ProductException;
 import com.amiriskhakov.technokratia.payload.request.ProductRequest;
 import com.amiriskhakov.technokratia.repository.ProductRepository;
@@ -28,7 +27,7 @@ public class ProductService {
 
     }
 
-    public Product saveProduct(ProductRequest productRequest) {
+    public void saveProduct(ProductRequest productRequest) {
         Product product = new Product();
         product.setCost(productRequest.getCost());
         product.setName(productRequest.getName());
@@ -36,7 +35,7 @@ public class ProductService {
 
         try {
             LOG.info("Saving product with articul {}", productRequest.getArticul());
-            return productRepository.save(product);
+            productRepository.save(product);
 
 
         } catch (Exception e) {
