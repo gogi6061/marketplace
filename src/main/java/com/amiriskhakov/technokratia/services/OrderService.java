@@ -13,10 +13,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -75,7 +74,9 @@ public class OrderService {
 
     public List<Order> getOrdersByDateBetween(LocalDateTime from, LocalDateTime to) {
 
-        return orderRepository.findOrdersByCreateDateBetween(from, to).orElseThrow();
+        List<Order> orders = orderRepository.findOrdersByCreateDateBetween(from, to).orElseThrow();
+        Collections.reverse(orders);
+        return orders;
     }
 
 }
