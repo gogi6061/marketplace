@@ -1,10 +1,16 @@
 package com.amiriskhakov.technokratia.payload.request;
 
+import javax.validation.constraints.NotEmpty;
+
 public class ProductRequest {
+
+    @NotEmpty
     private String name;
 
+    @NotEmpty
     private double cost;
 
+    @NotEmpty
     private String articul;
 
     public ProductRequest(String name, double cost, String articul) {

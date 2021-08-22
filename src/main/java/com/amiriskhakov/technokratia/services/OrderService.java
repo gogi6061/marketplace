@@ -73,18 +73,9 @@ public class OrderService {
 
     }
 
-    public List<Order> getOrdersByDateBetween(String from, String to) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd 00:00:00:00");
+    public List<Order> getOrdersByDateBetween(LocalDateTime from, LocalDateTime to) {
 
-
-        LocalDate dateFrom = LocalDate.parse(from);
-        LocalDate dateTo = LocalDate.parse(to);
-
-        LocalDateTime dateTimeFrom = dateFrom.atTime(0, 0);
-        LocalDateTime dateTimeTo = dateTo.atTime(0, 0);
-
-        System.out.println(dateFrom);
-        return orderRepository.findOrdersByCreateDateBetween(dateTimeFrom, dateTimeTo).orElseThrow();
+        return orderRepository.findOrdersByCreateDateBetween(from, to).orElseThrow();
     }
 
 }

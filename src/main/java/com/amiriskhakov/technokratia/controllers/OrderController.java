@@ -1,5 +1,6 @@
 package com.amiriskhakov.technokratia.controllers;
 
+import com.amiriskhakov.technokratia.entity.Order;
 import com.amiriskhakov.technokratia.payload.request.OrderRequest;
 import com.amiriskhakov.technokratia.payload.response.MessageResponse;
 import com.amiriskhakov.technokratia.services.OrderService;
@@ -11,6 +12,10 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.util.ObjectUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.List;
 
 @RestController
 @CrossOrigin
@@ -37,7 +42,7 @@ public class OrderController {
     }
 
     @GetMapping("/get")
-    public ResponseEntity<Object> getOrder(@RequestParam("email") String email) {
+    public ResponseEntity<List<Order>> getOrder(@RequestParam("email") String email) {
 
         return new ResponseEntity<>(orderService.getOrdersByEmail(email), HttpStatus.OK);
 
@@ -45,15 +50,23 @@ public class OrderController {
     }
 
     @GetMapping("/getByArt")
-    public ResponseEntity<Object> getOrderArt(@RequestParam("art") String art) {
+    public ResponseEntity<List<Order>> getOrderArt(@RequestParam("art") String art) {
         return new ResponseEntity<>(orderService.getOrdersByArt(art), HttpStatus.OK);
     }
 
     @GetMapping("/getByDateBetween")
-    public ResponseEntity<Object> getOrderBetweenDates(@RequestParam("from") String from,
+    public ResponseEntity<List<Order>> getOrderBetweenDates(@RequestParam("from") String from,
                                                        @RequestParam("to") String to) {
 
-        return new ResponseEntity<>(orderService.getOrdersByDateBetween(from, to), HttpStatus.OK);
+
+        LocalDate dateFrom = LocalDate.parse(from);
+        LocalDate dateTo = LocalDate.parse(to);
+
+        LocalDateTime dateTimeFrom = dateFrom.atTime(0, 0);
+        LocalDateTime dateTimeTo = dateTo.atTime(0, 0);
+
+        return new ResponseEntity<>(orderService.getOrdersByDateBetween(dateTimeFrom
+                , dateTimeTo), HttpStatus.OK);
 
 
     }
